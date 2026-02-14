@@ -1,0 +1,18 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+image = cv2.imread("input.jpeg")   # change name if needed
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    print("Original Image:")
+    cv2_imshow(image)
+
+    rotated_180 = cv2.rotate(image, cv2.ROTATE_180)
+
+    print("Rotated Image – 180 Degree:")
+    cv2_imshow(rotated_180)
+
+    cv2.imwrite("rotated_180.jpg", rotated_180)
+    print("180 degree rotated image saved!")
