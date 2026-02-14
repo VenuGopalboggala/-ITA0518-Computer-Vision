@@ -1,0 +1,17 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+image = cv2.imread("input.jpg")
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    cv2_imshow(image)
+
+    blurred = cv2.GaussianBlur(image, (5,5), 0)
+
+    cv2_imshow(blurred)
+
+    cv2.imwrite("gaussian_blur_output.jpg", blurred)
+
+    print("Blurred image saved successfully!")
