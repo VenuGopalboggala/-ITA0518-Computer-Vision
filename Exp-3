@@ -1,0 +1,25 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+# Read the uploaded image
+image = cv2.imread("input.jpg")   # change name if your file is different
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    # Show original image
+    cv2_imshow(image)
+
+    # Convert to grayscale (required for Canny)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Apply Canny Edge Detection
+    edges = cv2.Canny(gray, 100, 200)
+
+    # Show edge detected image
+    cv2_imshow(edges)
+
+    # Save the output
+    cv2.imwrite("canny_output.jpg", edges)
+
+    print("Canny edge image saved successfully!")
