@@ -1,0 +1,38 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+image = cv2.imread("input.jpeg")
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    print("Original Image:")
+    cv2_imshow(image)
+
+    # Crop ROI
+    roi = image[50:200, 100:250]
+
+    print("Cropped ROI:")
+    cv2_imshow(roi)
+
+    # Copy original image
+    image_copy = image.copy()
+
+    # Get sizes
+    h, w = roi.shape[:2]
+    H, W = image.shape[:2]
+
+    # Choose safe paste position inside image
+    x = W - w - 10
+    y = H - h - 10
+
+    # Paste ROI safely
+    image_copy[y:y+h, x:x+w] = roi
+
+    print("Image after Copy and Paste:")
+    cv2_imshow(image_copy)
+
+    cv2.imwrite("cropped_roi.jpg", roi)
+    cv2.imwrite("pasted_output.jpg", image_copy)
+
+    print("ROI images saved successfully!")
