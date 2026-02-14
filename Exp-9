@@ -1,0 +1,32 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+# Read image
+image = cv2.imread("input.jpeg")   # change name if needed
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    print("Original Image:")
+    cv2_imshow(image)
+
+    # Get original size
+    height, width = image.shape[:2]
+
+    # Resize to bigger size (scale up)
+    bigger = cv2.resize(image, (width * 2, height * 2))
+
+    print("Bigger Image:")
+    cv2_imshow(bigger)
+
+    # Resize to smaller size (scale down)
+    smaller = cv2.resize(image, (width // 2, height // 2))
+
+    print("Smaller Image:")
+    cv2_imshow(smaller)
+
+    # Save outputs
+    cv2.imwrite("bigger_image.jpg", bigger)
+    cv2.imwrite("smaller_image.jpg", smaller)
+
+    print("Resized images saved successfully!")
