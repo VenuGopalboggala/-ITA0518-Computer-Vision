@@ -1,0 +1,21 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+image = cv2.imread("input.jpeg")
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=5)
+    sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=5)
+
+    print("Sobel X:")
+    cv2_imshow(sobelx)
+
+    print("Sobel Y:")
+    cv2_imshow(sobely)
+
+    cv2.imwrite("sobelx.jpg", sobelx)
+    cv2.imwrite("sobely.jpg", sobely)
