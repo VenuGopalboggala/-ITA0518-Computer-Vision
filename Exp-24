@@ -1,0 +1,29 @@
+import cv2
+import numpy as np
+
+# Read image
+img = cv2.imread("input.jpg")
+
+# Convert to grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Structuring element (kernel)
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (9,9))
+
+# ---------------------------
+# Step 1: Black Hat Operation
+# ---------------------------
+blackhat = cv2.morphologyEx(gray, cv2.MORPH_BLACKHAT, kernel)
+
+# ---------------------------
+# Step 2: Dilate foreground regions
+# ---------------------------
+dilated = cv2.dilate(blackhat, kernel, iterations=1)
+
+# Display results
+cv2.imshow("Original", img)
+cv2.imshow("BlackHat Output", blackhat)
+cv2.imshow("Dilated Foreground", dilated)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
