@@ -1,0 +1,31 @@
+import cv2
+import numpy as np
+from google.colab.patches import cv2_imshow
+
+image = cv2.imread("input.jpeg")
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    print("Original Image:")
+    cv2_imshow(image)
+
+    rows, cols, ch = image.shape
+
+    # Select three points from original image
+    pts1 = np.float32([[50,50], [200,50], [50,200]])
+
+    # Map them to new locations
+    pts2 = np.float32([[10,100], [200,50], [100,250]])
+
+    # Create affine transformation matrix
+    matrix = cv2.getAffineTransform(pts1, pts2)
+
+    # Apply affine transformation
+    affine_image = cv2.warpAffine(image, matrix, (cols, rows))
+
+    print("Affine Transformed Image:")
+    cv2_imshow(affine_image)
+
+    cv2.imwrite("affine_output.jpg", affine_image)
+    print("Affine transformed image saved!")
