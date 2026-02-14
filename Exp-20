@@ -1,0 +1,26 @@
+import cv2
+import numpy as np
+from google.colab.patches import cv2_imshow
+
+# Read image
+image = cv2.imread("input.jpeg")   # change filename if needed
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    print("Original Image:")
+    cv2_imshow(image)
+
+    # Create structuring element (kernel)
+    kernel = np.ones((5,5), np.uint8)
+
+    # Apply Opening operation (Erosion followed by Dilation)
+    opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
+
+    print("Image after Opening Operation:")
+    cv2_imshow(opening)
+
+    # Save result
+    cv2.imwrite("opening_output.jpg", opening)
+
+    print("Opening operation completed successfully!")
