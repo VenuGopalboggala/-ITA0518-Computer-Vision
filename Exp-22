@@ -1,0 +1,26 @@
+import cv2
+import numpy as np
+from google.colab.patches import cv2_imshow
+
+# Read image
+image = cv2.imread("input.jpeg")   # change filename if needed
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    print("Original Image:")
+    cv2_imshow(image)
+
+    # Create structuring element (kernel)
+    kernel = np.ones((5,5), np.uint8)
+
+    # Apply Top Hat operation
+    top_hat = cv2.morphologyEx(image, cv2.MORPH_TOPHAT, kernel)
+
+    print("Top Hat Output Image:")
+    cv2_imshow(top_hat)
+
+    # Save result
+    cv2.imwrite("tophat_output.jpg", top_hat)
+
+    print("Top Hat operation completed successfully!")
