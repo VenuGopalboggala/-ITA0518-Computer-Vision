@@ -1,0 +1,27 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+# Read image
+image = cv2.imread("input.jpg")   # change if your filename is different
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    # Show original image
+    print("Original Image:")
+    cv2_imshow(image)
+
+    # Convert to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Apply Histogram Equalization
+    equalized = cv2.equalizeHist(gray)
+
+    # Show equalized image
+    print("Histogram Equalized Image:")
+    cv2_imshow(equalized)
+
+    # Save the output image
+    cv2.imwrite("histogram_equalized_output.jpg", equalized)
+
+    print("Histogram equalized image saved successfully!")
