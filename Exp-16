@@ -1,0 +1,20 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+image = cv2.imread("input.jpeg")
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    watermark = image.copy()
+
+    text = "MY WATERMARK"
+
+    cv2.putText(watermark, text, (50,50),
+                cv2.FONT_HERSHEY_SIMPLEX, 1,
+                (0,0,255), 2)
+
+    print("Watermarked Image:")
+    cv2_imshow(watermark)
+
+    cv2.imwrite("watermarked_output.jpg", watermark)
