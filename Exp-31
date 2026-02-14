@@ -1,0 +1,21 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+# Read image
+img = cv2.imread("smile.jpeg")
+
+if img is None:
+    raise Exception("Image not found")
+
+# Convert to grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Apply threshold segmentation
+T = 127
+_, binary = cv2.threshold(gray, T, 255, cv2.THRESH_BINARY)
+
+# Show results
+print("Threshold value used:", T)
+
+cv2_imshow(gray)
+cv2_imshow(binary)
