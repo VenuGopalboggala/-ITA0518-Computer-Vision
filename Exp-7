@@ -1,0 +1,16 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+video = cv2.VideoCapture("sample.mp4")
+
+print("Displaying Video at Normal Speed:")
+
+while video.isOpened():
+    ret, frame = video.read()
+
+    if not ret:
+        break
+
+    cv2_imshow(frame)
+
+video.release()
