@@ -1,0 +1,30 @@
+import numpy as np
+import cv2
+from google.colab.patches import cv2_imshow
+
+def draw_rectangle():
+
+    # User input
+    height = int(input("Enter image height: "))
+    width = int(input("Enter image width: "))
+
+    # Create white image
+    img = np.ones((height, width, 3), dtype=np.uint8) * 255
+
+    # Rectangle coordinates (centered)
+    start_point = (width//4, height//4)
+    end_point = (3*width//4, 3*height//4)
+
+    # Color = Blue (BGR)
+    color = (255, 0, 0)
+
+    # Thickness
+    thickness = 3
+
+    # Draw rectangle
+    cv2.rectangle(img, start_point, end_point, color, thickness)
+
+    # Display image
+    cv2_imshow(img)
+
+draw_rectangle()
